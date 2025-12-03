@@ -80,9 +80,16 @@ export const notFoundHandler = (req: Request, res: Response) => {
 
 /**
  * Async handler wrapper to catch errors in async route handlers
+ * Updated to properly handle Promise<void> return type
  */
-export const asyncHandler = (fn: Function) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+type AsyncRequestHandler = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => Promise<void | any>;
+
+export const asyncHandler = (fn: AsyncRequestHandler) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };
 };

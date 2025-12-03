@@ -74,7 +74,7 @@ class TimerService {
 
     // Reset student answer status for next question
     poll.students.forEach((student, socketId) => {
-      pollStore.updateStudent(pollId, socketId, { hasAnswered: false, answer: undefined });
+      pollStore.updateStudent(pollId, socketId, { hasAnswered: false, answer: null });
     });
 
     // Broadcast time up and results

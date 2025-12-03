@@ -88,16 +88,17 @@ class SocketController {
           throw new Error('You do not have an active poll');
         }
 
-        // Start question
+        // Start question with validated timeout
+        const timeoutValue = validData.timeout ?? 60;
         const question = pollService.startQuestion(
           poll.id,
           validData.question,
           validData.options,
-          validData.timeout
+          timeoutValue
         );
 
         // Start timer
-        const timerHandle = timerService.startTimer(poll.id, question.id, validData.timeout);
+        const timerHandle = timerService.startTimer(poll.id, question.id, timeoutValue);
         question.timerHandle = timerHandle;
 
         // Broadcast new question to all students
@@ -108,7 +109,7 @@ class SocketController {
             id: opt.id,
             text: opt.text,
           })),
-          timeout: validData.timeout,
+          timeout: timeoutValue,
           startedAt: question.startedAt,
         });
 
@@ -123,7 +124,7 @@ class SocketController {
         logger.info('Question started', { 
           pollId: poll.id, 
           questionId: question.id,
-          timeout: validData.timeout,
+          timeout: timeoutValue,
         });
       } catch (error: any) {
         logger.error('Error starting question', { error: error.message });
@@ -373,7 +374,7 @@ class SocketController {
 
         // Get user's poll (works for both teacher and student)
         let poll = pollService.getPollByTeacher(socket.id);
-        let role = USER_ROLES.TEACHER;
+        let role: 'teacher' | 'student' = USER_ROLES.TEACHER;
         let senderName = 'Teacher';
 
         if (!poll) {

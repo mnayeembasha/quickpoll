@@ -45,6 +45,22 @@ class PollService {
   }
 
   /**
+   * Get poll by teacher socket ID
+   */
+  getPollByTeacher(teacherSocketId: string): Poll | null {
+    const poll = pollStore.getPollByTeacher(teacherSocketId);
+    return poll || null;
+  }
+
+  /**
+   * Get poll by student socket ID
+   */
+  getPollByStudent(studentSocketId: string): Poll | null {
+    const poll = pollStore.getPollByStudent(studentSocketId);
+    return poll || null;
+  }
+
+  /**
    * Add student to poll
    */
   addStudentToPoll(pollId: string, studentSocketId: string, studentName: string): Student {
@@ -69,6 +85,7 @@ class PollService {
       name: studentName,
       joinedAt: new Date(),
       hasAnswered: false,
+      answer: null,
     };
 
     pollStore.addStudent(pollId, student);
@@ -122,7 +139,7 @@ class PollService {
 
     // Reset all students' answer status
     poll.students.forEach((student, socketId) => {
-      pollStore.updateStudent(pollId, socketId, { hasAnswered: false, answer: undefined });
+      pollStore.updateStudent(pollId, socketId, { hasAnswered: false, answer: null });
     });
 
     logger.info('Question started', { pollId, questionId: question.id, timeout });

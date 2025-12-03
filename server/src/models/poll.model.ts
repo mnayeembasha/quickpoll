@@ -11,7 +11,7 @@ export interface Student {
   name: string;
   joinedAt: Date;
   hasAnswered: boolean;
-  answer?: string;
+  answer: string | null;
 }
 
 export interface Option {
