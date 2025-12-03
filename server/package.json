@@ -1,18 +1,40 @@
 {
-  "name": "server",
+  "name": "quick-poll",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "description": "QuickPoll - Real-time polling system backend with Socket.io",
+  "main": "dist/index.js",
   "scripts": {
-    "build":"tsc -b",
+    "build": "tsc -b",
     "start": "node dist/index.js",
-    "dev": "npm run build && npm run start"
-  }
-,
-  "keywords": [],
+    "dev": "npm run build && npm run start",
+    "lint": "eslint . --ext .ts",
+    "test": "jest"
+  },
+  "keywords": [
+    "polling",
+    "socket.io",
+    "express",
+    "typescript"
+  ],
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
   "dependencies": {
-    "typescript": "^5.9.3"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nanoid": "^3.3.7",
+    "socket.io": "^4.6.1",
+    "winston": "^3.11.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.19.25",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
   }
 }

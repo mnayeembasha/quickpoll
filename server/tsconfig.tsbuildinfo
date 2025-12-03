@@ -1,1 +1,1 @@
-{"root":["./src/index.ts"],"version":"5.9.3"}
+{"root":["./src/app.ts","./src/index.ts","./src/config/socket.config.ts","./src/controllers/poll.controller.ts","./src/controllers/socket.controller.ts","./src/middleware/error.middleware.ts","./src/middleware/validation.middleware.ts","./src/models/poll.model.ts","./src/routes/poll.routes.ts","./src/services/poll.service.ts","./src/services/timer.service.ts","./src/utils/constants.ts","./src/utils/logger.ts"],"errors":true,"version":"5.9.3"}
