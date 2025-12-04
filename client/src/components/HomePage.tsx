@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import InterviewBadge from '@/components/InterviewBadge';
+
 
 const HomePage: React.FC = () => {
   const [role, setRole] = useState<string | null>(null);
@@ -13,6 +15,7 @@ const HomePage: React.FC = () => {
       <div className="max-w-3xl w-full space-y-10">
         {/* Header */}
         <div className="text-center space-y-2">
+          <InterviewBadge/>
           <h1 className="text-4xl">
             Welcome to the <span className="text-black font-bold">Live Polling System</span>
           </h1>
