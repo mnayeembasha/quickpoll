@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SocketContext } from '@/context/SocketContext';
 
 const TeacherDashboard: React.FC = () => {
