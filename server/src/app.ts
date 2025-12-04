@@ -1,4 +1,4 @@
-import express, { type Application } from 'express';
+import express, { type Application,type Request,type Response,type NextFunction } from 'express';
 import cors from 'cors';
 import pollRoutes from './routes/poll.routes';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
@@ -57,7 +57,7 @@ const createApp = (): Application => {
   // app.use('/api/', limiter);
 
   // Request logging middleware
-  app.use((req, res, next) => {
+  app.use((req:Request, res:Response, next:NextFunction) => {
     logger.info('Incoming request', {
       method: req.method,
       path: req.path,
@@ -71,7 +71,7 @@ const createApp = (): Application => {
   app.use('/api', pollRoutes);
 
   // Root endpoint
-  app.get('/', (req, res) => {
+  app.get('/', (req:Request, res:Response) => {
     res.json({
       success: true,
       message: 'Live Polling System API',
