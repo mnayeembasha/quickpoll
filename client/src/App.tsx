@@ -1,15 +1,37 @@
+import React, { useState, useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { Toaster } from 'react-hot-toast';
+import { SocketProvider } from '@/context/SocketContext';
+import { store } from '@/store';
 
+import HomePage from '@/components/HomePage';
+import TeacherDashboard from '@/components/TeacherDashboard';
+import StudentInterface from '@/components/StudentInterface';
 
-function App() {
+const App: React.FC = () => {
+  const [currentPath, setCurrentPath] = useState('/');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentPath(window.location.hash.slice(1) || '/');
+    };
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   return (
-    <>
-    <div className="text-neutral-500 bg-background text-foreground h-screen flex flex-col justify-center items-center">
-      <div className="text-purple-500 text-4xl">QuickPoll</div>
-      <div className="text-neutral-500 text-2xl ">Live Polling System</div>
-    </div>
-    </>
-  )
-}
+    <Provider store={store}>
+      <SocketProvider>
+        <div className="min-h-screen">
+          {currentPath === '/' && <HomePage />}
+          {currentPath === '/teacher' && <TeacherDashboard />}
+          {currentPath === '/student' && <StudentInterface />}
+        </div>
+        <Toaster position="top-right" />
+      </SocketProvider>
+    </Provider>
+  );
+};
 
 export default App;
