@@ -7,7 +7,7 @@ export const SocketContext = createContext<Socket | null>(null);
 const SOCKET_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:8080"
-    : "https://quickpoll-k3ko.onrender.com";
+    : "https://quickpoll-199r.onrender.com";
 
 export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
