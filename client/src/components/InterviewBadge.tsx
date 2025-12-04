@@ -1,4 +1,3 @@
-import React from "react";
 import { Sparkles } from "lucide-react"; // icon similar to the one in your image
 
 const IntervueBadge = () => {
